@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DanX Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">DanX</div>
+            <nav class="nav">
+                <a href="#home">Home</a>
+                <a href="#about">About Me</a>
+                <a href="#skills">Skills</a>
+                <a href="#work">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="profile-image" id="profileImage">
+                        <img src="https://files.catbox.moe/g3d93v.jpg" alt="Dani Setiawan">
+                        <div class="music-indicator"><i class="fas fa-play"></i></div>
+                    </div>
+                    <h1>Dani Setiawan</h1>
+                    <p class="subtitle">Machine Learning Engineer</p>
+                    <div class="hero-links">
+                        <a href="#work" class="btn">My Projects</a>
+                        <a href="#contact" class="btn btn-outline">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <p>an intermediate level student who is studying programming, especially machine learning.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon"><i class="fab fa-js"></i></div>
+                        <h3>JavaScript</h3>
+                        <p>Node.js</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><i class="fab fa-python"></i></div>
+                        <h3>Python</h3>
+                        <p>Machine Learning, Dana analys</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                        <h3>CSS</h3>
+                        <p>Simple design</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="work">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="projects">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://files.catbox.moe/tm8dtm.jpg" alt="WhatsApp Bot Project">
+                        </div>
+                        <div class="project-info">
+                            <h3>WhatsApp Enterprise Bot</h3>
+                            <p>Multi-device automation solution for business communication</p>
+                            <a href="https://wa.me/+6283898153115?text=.menu" target="_blank" class="project-link">View Project →</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://files.catbox.moe/ph93ql.jpg" alt="API Project">
+                        </div>
+                        <div class="project-info">
+                            <h3>Enterprise API Suite</h3>
+                            <p>Scalable REST API infrastructure for corporate applications</p>
+                            <a href="https://dan-xapi.vercel.app" target="_blank" class="project-link">View Project →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+          
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p><i class="fas fa-envelope"></i>danisetiawan21057@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +62 831 4627 6723</p>
+                        <div class="social-links">
+                            <a href="https://github.com/DanX1020" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://wa.me/+6283146276723" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://t.me/DANNN_0102" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Dani Setiawan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
