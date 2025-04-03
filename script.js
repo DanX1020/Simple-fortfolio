@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     menuToggle.addEventListener('click', function() {
         nav.classList.toggle('active');
+        this.setAttribute('aria-expanded', nav.classList.contains('active'));
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+            nav.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
     });
 
     // Smooth scrolling for navigation
@@ -28,13 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Close mobile menu if open
             nav.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
         });
     });
 
     // Header shadow on scroll
+    const header = document.querySelector('.header');
     window.addEventListener('scroll', function() {
-        const header = document.querySelector('.header');
-        if (window.scrollY > 50) {
+        if (window.scrollY > 20) {
             header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
         } else {
             header.style.boxShadow = 'none';
@@ -56,54 +66,73 @@ document.addEventListener('DOMContentLoaded', function() {
     const bgMusic = document.getElementById('bgMusic');
     
     // Set volume to 30% by default
-    bgMusic.volume = 0.3;
-    
-    profileImage.addEventListener('click', function() {
-        if (bgMusic.paused) {
-            bgMusic.play()
-                .then(() => {
-                    this.classList.add('rotate', 'playing');
-                    this.querySelector('.music-indicator i').className = 'fas fa-pause';
-                })
-                .catch(error => {
-                    console.error('Audio playback failed:', error);
-                    alert('Please click the play button to start music');
-                });
-        } else {
-            bgMusic.pause();
-            this.classList.remove('rotate', 'playing');
-            this.querySelector('.music-indicator i').className = 'fas fa-play';
-        }
-    });
+    if (bgMusic) {
+        bgMusic.volume = 0.3;
+        
+        profileImage.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play()
+                    .then(() => {
+                        this.classList.add('rotate', 'playing');
+                        this.querySelector('.music-indicator i').className = 'fas fa-pause';
+                    })
+                    .catch(error => {
+                        console.error('Audio playback failed:', error);
+                        alert('Please interact with the page first to enable audio');
+                    });
+            } else {
+                bgMusic.pause();
+                this.classList.remove('rotate', 'playing');
+                this.querySelector('.music-indicator i').className = 'fas fa-play';
+            }
+        });
 
-    // Change play/pause icon on hover when music is playing
-    profileImage.addEventListener('mouseenter', function() {
-        if (!bgMusic.paused) {
-            this.querySelector('.music-indicator i').className = 'fas fa-pause';
-        }
-    });
+        // Change play/pause icon on hover when music is playing
+        profileImage.addEventListener('mouseenter', function() {
+            if (!bgMusic.paused) {
+                this.querySelector('.music-indicator i').className = 'fas fa-pause';
+            }
+        });
 
-    profileImage.addEventListener('mouseleave', function() {
-        if (!bgMusic.paused) {
-            this.querySelector('.music-indicator i').className = 'fas fa-play';
-        }
-    });
+        profileImage.addEventListener('mouseleave', function() {
+            if (!bgMusic.paused) {
+                this.querySelector('.music-indicator i').className = 'fas fa-play';
+            }
+        });
+    }
 
     // Dark mode toggle
     const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        
-        // Save theme preference
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            this.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            
+            // Save theme preference
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            themeToggle.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+            themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+        }
+    }
+
+    // Add focus styles for keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.classList.add('keyboard-nav');
+        }
     });
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-nav');
+    });
 });
