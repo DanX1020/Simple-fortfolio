@@ -16,6 +16,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Intersection Observer untuk animasi section
+    const sections = document.querySelectorAll('section:not(#home)');
+
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                
+                // Update URL hash tanpa trigger scroll
+                if (history.replaceState) {
+                    history.replaceState(null, null, `#${entry.target.id}`);
+                }
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Aktifkan section yang sedang dilihat saat load
+    function checkVisibleSections() {
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const isVisible = (
+                rect.top <= (window.innerHeight * 0.75) && 
+                rect.bottom >= (window.innerHeight * 0.25)
+            );
+            
+            if (isVisible) {
+                section.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('load', checkVisibleSections);
+    window.addEventListener('scroll', checkVisibleSections);
+
     // Smooth scrolling for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -29,6 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const headerHeight = document.querySelector('.header').offsetHeight;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            
+            // Trigger animasi sebelum scroll
+            targetElement.classList.add('active');
             
             window.scrollTo({
                 top: targetPosition,
