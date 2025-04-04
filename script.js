@@ -78,8 +78,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
             window.scrollTo({
                 top: targetPosition,
-                behavior: 'smooth'
+                behavior: 'smooth',
+                duration: 1000
             });
+            
+            // Prevent default scroll while custom animation is running
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 1000);
             
             // Close mobile menu if open
             nav.classList.remove('active');
@@ -110,25 +117,82 @@ document.addEventListener('DOMContentLoaded', function() {
     // Profile image music control
     const profileImage = document.querySelector('.profile-image');
     const bgMusic = document.getElementById('bgMusic');
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioContext.createAnalyser();
+    const audioSource = audioContext.createMediaElementSource(bgMusic);
+    
+    // Connect audio nodes
+    audioSource.connect(analyser);
+    analyser.connect(audioContext.destination);
+    
+    // Configure analyser
+    analyser.fftSize = 256;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    
+    // Create canvas for visualization
+    const canvas = document.createElement('canvas');
+    canvas.className = 'audio-visualizer';
+    document.querySelector('.profile-image').appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    
+    function drawVisualizer() {
+        if (!isMusicPlaying) return;
+        
+        requestAnimationFrame(drawVisualizer);
+        analyser.getByteFrequencyData(dataArray);
+        
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        
+        const barWidth = canvas.width / bufferLength * 2.5;
+        let x = 0;
+        
+        for (let i = 0; i < bufferLength; i++) {
+            const barHeight = (dataArray[i] / 255) * canvas.height / 2;
+            
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#4299e1');
+            gradient.addColorStop(1, '#805ad5');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+            
+            x += barWidth + 1;
+        }
+    }
     
     // Set volume to 30% by default
-    if (bgMusic) {
+    if (bgMusic && profileImage) {
         bgMusic.volume = 0.3;
+        let isMusicPlaying = false;
         
-        profileImage.addEventListener('click', function() {
-            if (bgMusic.paused) {
-                bgMusic.play()
-                    .then(() => {
-                        this.classList.add('rotate', 'playing');
+        profileImage.addEventListener('click', async function() {
+            if (audioContext.state === 'suspended') {
+                await audioContext.resume();
+            }
+            if (!isMusicPlaying) {
+                // Load the audio file if not loaded
+                bgMusic.load();
+                // Play the audio
+                const playPromise = bgMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isMusicPlaying = true;
+                        this.classList.add('playing');
                         this.querySelector('.music-indicator i').className = 'fas fa-pause';
                     })
                     .catch(error => {
                         console.error('Audio playback failed:', error);
-                        alert('Please interact with the page first to enable audio');
+                        alert('Please try clicking again to enable audio');
                     });
+                }
             } else {
                 bgMusic.pause();
-                this.classList.remove('rotate', 'playing');
+                isMusicPlaying = false;
+                this.classList.remove('playing');
                 this.querySelector('.music-indicator i').className = 'fas fa-play';
             }
         });
@@ -182,3 +246,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('keyboard-nav');
     });
 });
+
+// Touch ripple effect
+document.addEventListener('touchstart', function(e) {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    document.body.appendChild(ripple);
+    
+    const touch = e.touches[0];
+    const x = touch.clientX;
+    const y = touch.clientY;
+    
+    ripple.style.top = `${y}px`;
+    ripple.style.left = `${x}px`;
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}, {passive: true});
