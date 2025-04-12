@@ -1,139 +1,97 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DanX | Full Stack Developer & AI Engineer</title>
-    <meta name="description" content="Professional portfolio of Dani Setiawan - Back End Developer and Machine Learning Engineer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tsparticles@2.3.4/tsparticles.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DanX Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loader">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <div class="loader-text">INITIALIZING SYSTEMS</div>
-            <div class="loader-progress"></div>
-        </div>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">DanX</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+       <li><a href="#about">About Me</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="theme-toggle">
+        <input type="checkbox" id="theme-switch">
+        <label for="theme-switch" class="toggle-label">
+          <i class="fas fa-sun"></i>
+          <i class="fas fa-moon"></i>
+          <span class="toggle-ball"></span>
+        </label>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-
-    <div id="particles-js"></div>
-    
-    <!-- 3D Cursor System -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo" data-text="DANX">DANX</div>
-            <nav class="nav">
-                <a href="#home" class="nav-link magnetic" data-strength="0.1">
-                    <span>Home</span>
-                </a>
-                <a href="#about" class="nav-link magnetic" data-strength="0.1">
-                    <span>About</span>
-                </a>
-                <a href="#skills" class="nav-link magnetic" data-strength="0.1">
-                    <span>Skills</span>
-                </a>
-                <a href="#work" class="nav-link magnetic" data-strength="0.1">
-                    <span>Work</span>
-                </a>
-                <a href="#contact" class="nav-link magnetic" data-strength="0.1">
-                    <span>Contact</span>
-                </a>
-            </nav>
-            <div class="header-right">
-                <button id="themeToggle" class="theme-toggle magnetic" data-strength="0.2">
-                    <div class="toggle-circle"></div>
-                </button>
-                <div class="hamburger magnetic" data-strength="0.1">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-glitch">
-                        <div class="glitch-text" data-text="DANI SETIAWAN">DANI SETIAWAN</div>
-                        <div class="hero-subtitle">Full Stack Developer & AI Engineer</div>
-                    </div>
-                    <div class="hero-links">
-                        <a href="#work" class="btn magnetic" data-strength="0.3">
-                            <span>View Projects</span>
-                            <div class="liquid"></div>
-                        </a>
-                        <a href="#contact" class="btn btn-outline magnetic" data-strength="0.3">
-                            <span>Contact Me</span>
-                        </a>
-                    </div>
-                    <div class="scroll-indicator">
-                        <div class="mouse">
-                            <div class="mouse-wheel"></div>
-                        </div>
-                        <div class="scroll-text">SCROLL</div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-particles"></div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about">
+  </nav>
+        
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Hi, I'm <span>Dani Setiawan</span></h1>
+        <p>BackEnd Developer & Machine Learning Enggineer</p>
+        <a href="#projects" class="btn">View My Work</a>
+      </div>
+      <div class="hero-image">
+        <img src="assets/pp.jpg" alt="Profile">
+      </div>
+    </div>
+  </section>
+ 
+    <!-- About Section -->
+  <section id="about" class="about section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title"><span>A</span>bout <span>M</span>e</h2>
                 </div>
                 <div class="about-grid">
-                    <div class="about-image">
-                        <div class="image-wrapper">
-                            <img src="https://files.catbox.moe/g3d93v.jpg" alt="Dani Setiawan" loading="lazy">
-                            <div class="image-border"></div>
-                            <div class="image-dots"></div>
-                            <div class="image-hover"></div>
-                        </div>
-                    </div>
                     <div class="about-content">
                         <h3>Innovative Developer with Passion for Excellence</h3>
-                        <p class="about-text">High school student with expertise in full stack development and artificial intelligence. Focused on creating efficient, scalable solutions with cutting-edge technologies.</p>
+                        <p class="about-text">Award-winning developer with expertise in BackEnd development and artificial intelligence. Focused on creating cutting-edge, scalable solutions with modern technologies.</p>
                         <div class="about-stats">
                             <div class="stat-item">
-                                <div class="stat-icon"><i class="fas fa-code"></i></div>
-                                <div class="stat-number" data-count="15">0</div>
+                                <div class="stat-number" data-count="42">5</div>
                                 <div class="stat-text">Projects Completed</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-icon"><i class="fas fa-bolt"></i></div>
-                                <div class="stat-number" data-count="10000">0</div>
+                                <div class="stat-number" data-count="25000">1000</div>
                                 <div class="stat-text">Lines of Code</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-icon"><i class="fas fa-clock"></i></div>
-                                <div class="stat-number" data-count="5">0</div>
+                                <div class="stat-number" data-count="5">1</div>
                                 <div class="stat-text">Years Experience</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="about-shape"></div>
         </section>
+        
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2>My Projects</h2>
+      <div class="project-grid">
+        <!-- Projects will be added by JavaScript -->
+      </div>
+    </div>
+  </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="skills">
+  <!-- Skills Section -->
+          <section id="skills" class="skills section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title"><span>T</span>echnical <span>S</span>kills</h2>
@@ -145,137 +103,71 @@
                                 <circle cx="70" cy="70" r="70"></circle>
                                 <circle cx="70" cy="70" r="70"></circle>
                             </svg>
-                            <div class="skill-number">95%</div>
+                            <div class="skill-number">60%</div>
                         </div>
                         <div class="skill-info">
                             <h3>JavaScript/Node.js</h3>
-                            <p>React • Next.js • Express • Microservices</p>
-                            <div class="skill-tags">
-                                <span>ES6+</span>
-                                <span>TypeScript</span>
-                                <span>REST</span>
-                            </div>
+                            <P>Express • ReactJs • Web3</p>
                         </div>
                     </div>
-                    <!-- Additional skill cards -->
+                    <div class="skill-card">
+                        <div class="skill-progress">
+                            <svg>
+                                <circle cx="70" cy="70" r="70"></circle>
+                                <circle cx="70" cy="70" r="70"></circle>
+                            </svg>
+                            <div class="skill-number">70%</div>
+                        </div>
+                        <div class="skill-info">
+                            <h3>Python</h3>
+                            <p>Machine Learning • Deep Learning • Data Science</p>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-progress">
+                            <svg>
+                                <circle cx="70" cy="70" r="70"></circle>
+                                <circle cx="70" cy="70" r="70"></circle>
+                            </svg>
+                            <div class="skill-number">10%</div>
+                        </div>
+                        <div class="skill-info">
+                            <h3>C++</h3>
+                            <p>Nothing</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Work Section -->
-        <section id="work" class="work">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title"><span>P</span>ortfolio <span>P</span>rojects</h2>
-                </div>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://files.catbox.moe/tm8dtm.jpg" alt="WhatsApp Enterprise Bot" loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://wa.me/+6283898153115?text=.menu" target="_blank" class="project-link magnetic" data-strength="0.2">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <a href="#" class="project-link magnetic" data-strength="0.2">
-                                        <i class="fas fa-code"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>WhatsApp Enterprise Bot</h3>
-                            <p>Multi-device automation solution for business communication</p>
-                            <div class="project-tech">
-                                <span>Node.js</span>
-                                <span>Python</span>
-                                <span>AI</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Additional project cards -->
-                </div>
-            </div>
-        </section>
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title"><span>C</span>ontact <span>M</span>e</h2>
-                </div>
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <div class="info-card magnetic" data-strength="0.1">
-                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                            <h4>Email</h4>
-                            <p>danisetiawan21057@gmail.com</p>
-                        </div>
-                        <div class="info-card magnetic" data-strength="0.1">
-                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
-                            <h4>Phone</h4>
-                            <p>+62 831 4627 6723</p>
-                        </div>
-                        <div class="social-links">
-                            <a href="https://github.com/DanX1020" target="_blank" class="social-link magnetic" data-strength="0.2">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://wa.me/+6283146276723" target="_blank" class="social-link magnetic" data-strength="0.2">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                            <a href="https://t.me/DANNN_0102" target="_blank" class="social-link magnetic" data-strength="0.2">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <form class="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" required>
-                            <label for="name">Your Name</label>
-                            <div class="form-line"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" required>
-                            <label for="email">Your Email</label>
-                            <div class="form-line"></div>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" required></textarea>
-                            <label for="message">Your Message</label>
-                            <div class="form-line"></div>
-                        </div>
-                        <button type="submit" class="btn magnetic" data-strength="0.3">
-                            <span>Send Message</span>
-                            <div class="liquid"></div>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="contact-pattern"></div>
-        </section>
-    </main>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/DanX1020"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/+6283146276723"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://x.com/DANNN_0102"><i class="fab fa-twitter"></i></a>
+      </div>
+      <p>&copy; 2025 DanX Portfolio. All rights reserved.</p>
+    </div>
+  </footer>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">DANX</div>
-                <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#work">Work</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-copyright">
-                    &copy; <span id="year"></span> Dani Setiawan. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
+  <!-- Background Particles -->
+  <div class="particles"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.3.4/tsparticles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
