@@ -62,7 +62,7 @@ const projects = [
   {
     title: "Whatsapp Bot Multi Device",
     description: "A Whatsapp Bot with a lot of features.",
-    image: "/assets/project#1.jpg",
+    image: "https://files.catbox.moe/tm8dtm.jpg",
     tags: ["JavaScript", "NodeJS"],
     liveLink: "#",
     codeLink: "https://github.com/DanX1020/DANNN---Botz"
@@ -70,7 +70,7 @@ const projects = [
   {
     title: "REST API",
     description: "A REST API with a lot of fratures free & interesting.",
-    image: "/assets/project#2.jpg",
+    image: "https://files.catbox.moe/ph93ql.jpg",
     tags: ["NodeJS", "Express"],
     liveLink: "https://dan-xapi.vercel.app",
     codeLink: "https://github.com/DanX1020/DanXAPI"
@@ -78,11 +78,24 @@ const projects = [
   {
     title: "Portfolio Website",
     description: "A Simple portfolio.",
-    image: "/assets/project#3.jpg",
+    image: "https://files.catbox.moe/zinr90.jpg",
     tags: ["HTML", "CSS", "Java Script"],
     liveLink: "https://danx-portfolio.vercel.app",
     codeLink: "https://github.com/DanX1020/Simple-fortfolio"
   }
+];
+
+// Skills Data - Logo Only
+const skills = [
+  { icon: "fab fa-js", name: "JavaScript" },
+  { icon: "fab fa-python", name: "Python" },
+  { icon: "fab fa-java", name: "Java" },
+  { icon: "fab fa-html5", name: "HTML5" },
+  { icon: "fab fa-css3-alt", name: "CSS3" },
+  { icon: "fab fa-react", name: "React" },
+  { icon: "fab fa-node", name: "Node.js" },
+  { icon: "fab fa-database", name: "Database" },
+  { icon: "fab fa-git-alt", name: "Git" }
 ];
 
 // Render Projects
@@ -111,6 +124,21 @@ function renderProjects() {
     `;
     
     projectGrid.appendChild(projectCard);
+  });
+}
+
+// Render Skills Logos Only
+function renderSkills() {
+  const skillsGrid = document.querySelector('.skills-logo-grid');
+  
+  skills.forEach(skill => {
+    const skillLogo = document.createElement('div');
+    skillLogo.className = 'skill-logo';
+    skillLogo.title = skill.name; // Show name on hover
+    skillLogo.innerHTML = `<i class="${skill.icon}"></i>`;
+    skillLogo.tabIndex = 0; // Make it focusable
+    
+    skillsGrid.appendChild(skillLogo);
   });
 }
 
@@ -188,19 +216,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-  // Skill bars animation
-  gsap.utils.toArray('.skill-bar-fill').forEach(bar => {
-    const width = bar.getAttribute('data-width');
-    ScrollTrigger.create({
-      trigger: bar,
-      start: "top 80%",
-      onEnter: () => {
-        gsap.to(bar, {
-          width: `${width}%`,
-          duration: 1.5,
-          ease: "elastic.out(1, 0.5)"
-        });
-      }
+  // Skill logos animation
+  gsap.utils.toArray('.skill-logo').forEach((logo, i) => {
+    gsap.from(logo, {
+      opacity: 0,
+      scale: 0.5,
+      duration: 0.8,
+      delay: i * 0.1,
+      scrollTrigger: {
+        trigger: logo,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      ease: "back.out(1.7)"
     });
   });
   
